@@ -1,0 +1,32 @@
+---
+title: "Group 3 Project"
+authors: "John C. Hale, Leonard Clinton"
+date: "November 2, 2019"
+output: html_document
+---
+
+### Read in Data
+```{r}
+census_data <- read.csv("../data/Census Guyana 2012.csv")
+head(census_data)
+```
+
+### Correlation Matrix
+```{r}
+remove_for_cor <- c(1,2,3)
+cor(census_data[-remove_for_cor])
+
+# We need to remove all variables that have correlations over 0.9 and below 0.15 between most variables.
+
+
+```
+
+
+
+
+
+
+
+
+
+
