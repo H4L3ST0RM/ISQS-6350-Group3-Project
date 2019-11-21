@@ -71,6 +71,43 @@ summary(census_pca, cor=T, loadings = T)
 biplot(census_pca$scores[,1:2], census_pca$loadings[,1:2],col=c("black", "red"), cex = 0.6)
 ```
 
+### a) Create a scaled distance matrix for observation.
+```{r}
+census.mds = cmdscale(dist(scale(census)), eig = T) 
+cumsum(census.mds$eig)/sum(census.mds$eig)
+```
+
+### b) Perform Graphical MDS on Distance Matrix
+```{r}
+census.mds = cmdscale(dist(scale(census)), eig = T) 
+ 
+eignv <- abs(census.mds$eig) 
+ 
+plot(census.mds$points[,1:2], pch = ".")
+text(census.mds$points[,1:2], labels = census$Region, cex = 0.6) 
+```
+
+### c) Convert Correlation Matrix to Distance
+```{r}
+#install.packages("psych")
+library(psych)
+census.cor = cmdscale(cor2dist(cor(census[,2:23])),eig=T)
+census.cor
+```
+
+
+### d) Plot Correlation "Distance" Matrix
+```{r}
+
+eignv <- abs(census.cor$eig) 
+ 
+plot(census.cor$points[,1:2], pch = ".")
+text(census.cor$points[,1:2], labels = colnames(census[,2:23]), cex = 0.55)
+
+```
+
+
+
 
 
 
