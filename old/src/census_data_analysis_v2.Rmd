@@ -30,12 +30,12 @@ cor[,14:23]
 ```
 ```{r}
 d = dist(census)
-census.s = scale(census[1:23,])
-d.s = dist(census.s)
+census.s = scale(census, center=TRUE)
+#d.s = dist(census.s)
 #round((d.s), 2)
-census.s[,11:12]
+Boxplot(census.s, id.method="y")
 ```
-
+Common outliers are 8, 12, 6, 3,
 
 
 ```{r}
