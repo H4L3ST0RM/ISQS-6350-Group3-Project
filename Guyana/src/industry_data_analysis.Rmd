@@ -1,3 +1,6 @@
+```{r, include=TRUE, echo=FALSE}
+knitr::include_graphics("cover_page.jpg")
+```
 ---
 title: "Guyana Data Analysis"
 author: "John C. Hale, Leonard Clinton"
