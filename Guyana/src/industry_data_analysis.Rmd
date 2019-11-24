@@ -88,12 +88,12 @@ cumsum(census.mds$eig)/sum(census.mds$eig)
 
 ### Performing Graphical MDS on Distance Matrix
 ```{r}
-census.mds = cmdscale(dist(scale(census[,focus])), eig = T) 
+myindustries.mds = cmdscale(dist(scale(myindustries)), eig = T) 
  
-eignv <- abs(census.mds$eig) 
+eignv <- abs(myindustries.mds$eig) 
  
-plot(census.mds$points[,1:2], pch = ".")
-text(census.mds$points[,1:2], labels = census$Region, cex = 0.6) 
+plot(myindustries.mds$points[,1:2], pch = ".")
+text(myindustries.mds$points[,1:2], labels = mydata$Region, cex = 0.6) 
 ```
 
 Notice that region 4 contains nearly all of the outliers.
@@ -118,7 +118,7 @@ eignv <- abs(mydata.cor$eig)
 
 plot(mydata.cor$points[,1:2], type = "p")
 par(mar=c(1,1,1,1))
-text(mydata.cor$points[,1:2], labels = colnames(mydata), cex = 0.5, pos = 1)
+text(mydata.cor$points[,1:2], labels = colnames(mydata), cex = 0.6, pos = 1)
 
 ```
 
