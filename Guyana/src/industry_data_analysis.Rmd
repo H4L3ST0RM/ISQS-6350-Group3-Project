@@ -1,27 +1,33 @@
+---
+output:
+  word_document: default
+##  html_document: default
+---
+
+
 ```{r, include=TRUE, echo=FALSE}
-knitr::include_graphics("cover_page.jpg")
-```
----
-title: "Guyana Data Analysis"
-author: "John C. Hale, Leonard Clinton"
-date: "November 23, 2019"
-output: pdf_document
----
----
-title: "Group 3 Project"
-authors: "John C. Hale, Leonard Clinton"
-date: "November 20, 2019"
-output: html_document
----
+knitr::include_graphics("https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/src/cover_page.jpg") # insert cover page
+
+# redundant due to cover page?
+#---
+#title: "Guyana Data Analysis"
+#author: "John C. Hale, Leonard Clinton"
+#date: "November 23, 2019"
+#output: pdf_document
+#---
+#---
+#title: "Group 3 Project"
+#authors: "John C. Hale, Leonard Clinton"
+#date: "November 20, 2019"
+#output: html_document
+#---
 # Introduction
-Clearly describe the dataset and clearly describe the motivation behind studying the data. 
-Provide scholarly citations or quantitative facts to describe the motivation
-
-
+#Clearly describe the dataset and clearly describe the motivation behind studying the data. 
+#Provide scholarly citations or quantitative facts to describe the motivation
 # Data Cleaning & Visualization
-Clearly describe the data cleaning and outlier removal process.
-Present insightful visualizations motivating to do further exploratory or confirmatory analysis.
-
+#Clearly describe the data cleaning and outlier removal process.
+#Present insightful visualizations motivating to do further exploratory or confirmatory analysis.
+```
 
 
 ### Install the Required Packages
@@ -34,7 +40,7 @@ library(dplyr)
 ### Read in Data
 ```{r}
 options( warn = -1, width = 160 )
-census <- read.csv("../data/cleaned_census_data2.csv")
+census <- read.csv("https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/data/cleaned_census_perc_data2.csv")
 #census_perc <- read.csv("../data/cleaned_census_perc_data2.csv")
 focus <- c('ID','Region','Agriculture', 'Construction', 'IT', 'Finance', 'Education', 'Manufacturing', 'Population')
 census$ID <- seq.int(nrow(census))
