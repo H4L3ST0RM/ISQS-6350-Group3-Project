@@ -109,7 +109,7 @@ plot(myindustries.mds$points[,1:2], pch = ".")
 text(myindustries.mds$points[,1:2], labels = mydata$Region, cex = 0.6) 
 ```
 
-Notice that region 4 contains nearly all of the outliers.
+Notice that region 4 contains nearly all of the outliers.  Region 4 contains the largest city and capital Georgetown which would contain the greatest diversity of industry as compared to other regions as other regions are mainly rainforest or rural farming.
 
 
 
@@ -135,7 +135,7 @@ text(mydata.cor$points[,1:2], labels = colnames(mydata), cex = 0.6, pos = 1)
 
 ```
 
-Above you can see how the various industires relate to one another.
+Above you can see how the various industires relate to one another.  The main outlier, Agriculture, was the first industry to the country and region location is largely unrelated to subsequent industry.  Family farms were established under indentured servitude where land was available under British rule and those farms continue to this day under private ownership.  The second outlier is Education, which is government supported.  Schools are established everywhere, including indigenous rainforest regions where many industries do not exist.
 
 # Cluster Analysis
 Apply cluster analysis correctly and discuss the motivation behind that. Also, provide interesting insights into the results.
