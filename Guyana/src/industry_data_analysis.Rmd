@@ -28,7 +28,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-G
 #Clearly describe the data cleaning and outlier removal process.
 #Present insightful visualizations motivating to do further exploratory or confirmatory analysis.
 ```
+&nbsp;
 
+&nbsp;
+
+&nbsp;
 
 ### Install the Required Packages
 ```{r}
