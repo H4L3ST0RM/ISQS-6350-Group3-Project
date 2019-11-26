@@ -106,7 +106,7 @@ summary(census_pca, cor=T, loadings = T)
 biplot(census_pca$scores[,1:2], census_pca$loadings[,1:2],col=c("black", "red"), cex = 1, main="PCA-Biplot of Industries")
 ```
 Agriculture dominates component 2, while the rest of the industries are pretty evenlty spread through component 1. Also of note, finance, IT, Health, Entertainment, and Health are negative on component 2, all of which would theoretically be indicative of a more prosperous, urban society. 
-### a) Create a scaled distance matrix for observation.
+### Creating a scaled distance matrix for observation.
 ```{r}
 census.mds = cmdscale(dist(scale(myindustries)), eig = T) 
 (cumsum(census.mds$eig)/sum(census.mds$eig))[1:10]
@@ -126,7 +126,7 @@ Notice that region 4 contains nearly all of the outliers.  Region 4 contains the
 
 
 
-### Convert Correlation Matrix to Distance
+### Converting Correlation Matrix to Distance
 
 Below we are getting the distances between each variable. 
 
