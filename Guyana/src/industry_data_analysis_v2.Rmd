@@ -53,10 +53,10 @@ library(mclust)
 options( warn = -1, width = 160 )
 census <- read.csv("https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/data/cleaned_census_data2.csv")
 #census_perc <- read.csv("../data/cleaned_census_perc_data2.csv")
-focus <- c('ID','Region','Agriculture', 'Construction', 'IT', 'Finance', 'Education', 'Manufacturing', 'Population')
+focus <- c('ID','Region','Agriculture', 'Construction', 'IT', 'Finance', 'Education', 'Manufacturing','Mining', 'Entertainment', 'Health','Administrative','Population')
 census$ID <- seq.int(nrow(census))
 mydata <- census[,focus]
-myindustries <- mydata[,3:8]
+myindustries <- mydata[,3:12]
 head(mydata)
 options(digits = 3)
 
@@ -68,7 +68,7 @@ cor <- cor(mydata)
 cor
 ```
 ```{r}
-plot(mydata[,3:9], col=mydata$Region, main = "Array of Scatter Plots")
+plot(myindustries, col=mydata$Region, main = "Array of Scatter Plots")
 ```
 Notice that, with the exception of agriculture, all of the industries appear to be positively correlated with population. 
 
@@ -105,7 +105,7 @@ summary(census_pca, cor=T, loadings = T)
 ```{r, dpi=300, fig.width=15, fig.height=8}
 biplot(census_pca$scores[,1:2], census_pca$loadings[,1:2],col=c("black", "red"), cex = 1, main="PCA-Biplot of Industries")
 ```
-
+Agriculture dominates component 2, while the rest of the industries are pretty evenlty spread through component 1. Also of note, finance, IT, Health, Entertainment, and Health are negative on component 2, all of which would theoretically be indicative of a more prosperous, urban society. 
 ### a) Create a scaled distance matrix for observation.
 ```{r}
 census.mds = cmdscale(dist(scale(myindustries)), eig = T) 
@@ -155,9 +155,15 @@ text(myindustries.cor$points[,1:2], labels = colnames(myindustries), cex = 0.6)
 
 Above you can see how the various industires relate to one another.  The main outlier, Agriculture, was the first industry to the country and region location is largely unrelated to subsequent industry.  Family farms were established under indentured servitude where land was available under British rule and those farms continue to this day under private ownership. 
 
-Notice how closely construction and manufacturing are. This is an interesting grouping, seeing how they are both classic blue collar jobs. 
+Agriculture and Mining, the two largest outliers, are naturally going to be less dependent on the other industries, and more dependent on geographic location/resource availability.
 
-Education sits between the two grouping (construction, manufacturing) and the IT and finance grouping. We can speculate that while educational jobs will scale with population, above average number of education jobs could indicate a more high tech workforce, thus resulting in more finance and IT jobs.
+In the chart above that includes population, it can be seen that construction & population are right on top of one another. This makes sense, since the amount of construction projects should correlate with the populatoin size.
+
+Also notice how closely construction and manufacturing are. This is an interesting grouping, seeing how they are both classic blue collar jobs. 
+
+Health & Entertainment is an interesting grouping. This could possibly relate to economic prosperity. It could be suspected that more economically proserpous villages will have more healthcare and entertainment jobs. 
+
+Finance & Administrative grouping is also interesting. 
 
 Education is also government supported.  Schools are established everywhere, including indigenous rainforest regions where many industries do not exist. Which indicates why it is .
 
@@ -201,7 +207,7 @@ table(km$cluster,mydata$Region)
 ```
 ### Model Clustering
 ```{r}
-mc <- Mclust(myindustries,10)
+mc <- Mclust(myindustries)
 #table(mc$classification)
 ```
 ```{r}

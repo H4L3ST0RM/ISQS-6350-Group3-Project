@@ -4,19 +4,13 @@ Created on Wed Nov 20 16:59:38 2019
 
 @author: johnc
 """
-
-
-
+# importing pandas to use dataframes
 import pandas as pd
 
-
-
+# Reading in original data
 census = pd.read_csv('../data/Census Guyana 2012 v2.csv')
-census_perc = pd.read_csv('../data/Census Guyana 2012 v2.csv')
-
 #Dropping Race Data
 census = census.drop(columns=['Black','Amerindian','East Indian', 'Chinese', 'Mixed', 'Portugese', 'White', 'Other Ethnicity'])
-
 # Dropping Religion Data
 census = census.drop(columns=['Anglican','Methodist', 'Pentecostal', 'Catholic', 'Witness', 'Adventist', 'Bahai', 'Muslim',
                              
@@ -27,23 +21,15 @@ census = census.drop(columns=['0 to 4','5 to 9','10 to 14','15 to 19','20 to 24'
                      '80 to 84','85 +'])
 # Dropping Village Data
 census = census.drop(columns=['Village No', 'Village Name'])
-
+# Adding Population Variable
 census['Population'] = census['Male'] + census['Female']
-
 # Dropping columns with large amounds correlation above or below 0.15, 0.9
 census = census.drop(columns=['Female','Male'])
-
-corr = census.corr()
-corr.mask((abs(corr) < 0.15) | (abs(corr) > 0.9))
-
-
+# Removing missing data
 census.dropna(inplace=True)
-
+# Outputting to csv
 census.to_csv('../data/cleaned_census_data2.csv',index=False)
-
-census_region = census
-#census_region.to_csv('../data/census_grouped_region.csv', index = True)
-
+# Creating and outporting population percentage version
 census_percent = census
 for i in range(0,len(census)):
     census_percent.iloc[i,1:21] =  census.iloc[i,1:21] /  sum(census.iloc[i,1:21])
