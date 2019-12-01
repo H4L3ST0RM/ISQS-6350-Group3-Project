@@ -1,0 +1,15 @@
+White              -> IT, lambda1, NA
+White              -> Entertainment, lambda2, NA
+White              -> Health, lambda3, NA
+Blue               -> Construction, lambda4, NA
+Blue               -> Manufacturing, lambda5, NA
+White              -> Finance, lambda6, NA
+White             <-> Blue, rho, NA
+IT                <-> IT, theta1, NA
+Entertainment     <-> Entertainment, theta2, NA
+Health            <-> Health, theta3, NA
+Construction      <-> Construction, theta4, NA
+Manufacturing     <-> Manufacturing, theta5, NA
+Finance	          <-> Finance, theta6, NA
+White <-> White, NA, 1
+Blue <-> Blue, NA, 1

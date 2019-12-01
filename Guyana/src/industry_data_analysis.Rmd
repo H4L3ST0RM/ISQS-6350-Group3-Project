@@ -46,8 +46,6 @@ library(psych)
 library(MVA)
 library(dplyr)
 library(mclust)
-library(sem)
-library(semPlot)
 ```
 
 ### Read in Data
@@ -55,10 +53,10 @@ library(semPlot)
 options( warn = -1, width = 160 )
 census <- read.csv("https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/data/cleaned_census_data2.csv")
 #census_perc <- read.csv("../data/cleaned_census_perc_data2.csv")
-focus <- c('ID','Region','Agriculture', 'Construction', 'IT', 'Finance', 'Education', 'Manufacturing','Mining', 'Entertainment', 'Health','Administrative','Population')
+focus <- c('ID','Region','Agriculture', 'Construction', 'IT', 'Finance', 'Education', 'Manufacturing', 'Population')
 census$ID <- seq.int(nrow(census))
 mydata <- census[,focus]
-myindustries <- mydata[,3:12]
+myindustries <- mydata[,3:8]
 head(mydata)
 options(digits = 3)
 
@@ -70,7 +68,7 @@ cor <- cor(mydata)
 cor
 ```
 ```{r}
-plot(myindustries, col=mydata$Region, main = "Array of Scatter Plots")
+plot(mydata[,3:9], col=mydata$Region, main = "Array of Scatter Plots")
 ```
 Notice that, with the exception of agriculture, all of the industries appear to be positively correlated with population. 
 
@@ -107,8 +105,8 @@ summary(census_pca, cor=T, loadings = T)
 ```{r, dpi=300, fig.width=15, fig.height=8}
 biplot(census_pca$scores[,1:2], census_pca$loadings[,1:2],col=c("black", "red"), cex = 1, main="PCA-Biplot of Industries")
 ```
-Agriculture dominates component 2, while the rest of the industries are pretty evenlty spread through component 1. Also of note, finance, IT, Health, Entertainment, and Health are negative on component 2, all of which would theoretically be indicative of a more prosperous, urban society. 
-### Creating a scaled distance matrix for observation.
+
+### a) Create a scaled distance matrix for observation.
 ```{r}
 census.mds = cmdscale(dist(scale(myindustries)), eig = T) 
 (cumsum(census.mds$eig)/sum(census.mds$eig))[1:10]
@@ -128,7 +126,7 @@ Notice that region 4 contains nearly all of the outliers.  Region 4 contains the
 
 
 
-### Converting Correlation Matrix to Distance
+### Convert Correlation Matrix to Distance
 
 Below we are getting the distances between each variable. 
 
@@ -157,15 +155,9 @@ text(myindustries.cor$points[,1:2], labels = colnames(myindustries), cex = 0.6)
 
 Above you can see how the various industires relate to one another.  The main outlier, Agriculture, was the first industry to the country and region location is largely unrelated to subsequent industry.  Family farms were established under indentured servitude where land was available under British rule and those farms continue to this day under private ownership. 
 
-Agriculture and Mining, the two largest outliers, are naturally going to be less dependent on the other industries, and more dependent on geographic location/resource availability.
+Notice how closely construction and manufacturing are. This is an interesting grouping, seeing how they are both classic blue collar jobs. 
 
-In the chart above that includes population, it can be seen that construction & population are right on top of one another. This makes sense, since the amount of construction projects should correlate with the populatoin size.
-
-Also notice how closely construction and manufacturing are. This is an interesting grouping, seeing how they are both classic blue collar jobs. 
-
-Health & Entertainment is an interesting grouping. This could possibly relate to economic prosperity. It could be suspected that more economically proserpous villages will have more healthcare and entertainment jobs. 
-
-Finance & Administrative grouping is also interesting. 
+Education sits between the two grouping (construction, manufacturing) and the IT and finance grouping. We can speculate that while educational jobs will scale with population, above average number of education jobs could indicate a more high tech workforce, thus resulting in more finance and IT jobs.
 
 Education is also government supported.  Schools are established everywhere, including indigenous rainforest regions where many industries do not exist. Which indicates why it is .
 
@@ -183,11 +175,11 @@ plot.wgss = function(mydata, maxc) {
        ylab="Within groups sum of squares", main="Scree Plot")
 } 
 plot.wgss(myindustries.s, 12) # Elbow test.
-abline(v=3)
+abline(v=4)
 ```
 ### K-Means Clustering
 ```{r}
-km <- kmeans(myindustries.s, centers = 3, nstart = 10)
+km <- kmeans(myindustries.s, centers = 4, nstart = 10)
 table(km$cluster)
 ```
 
@@ -209,7 +201,7 @@ table(km$cluster,mydata$Region)
 ```
 ### Model Clustering
 ```{r}
-mc <- Mclust(myindustries)
+mc <- Mclust(myindustries,10)
 #table(mc$classification)
 ```
 ```{r}
@@ -227,68 +219,6 @@ plot(mc, what = "classification")
 The cluster analyses above came out as being quite volatile. Industry appears to be a poor indicator of Region. It would be interesting to see how the cluster analyses mapped out on a geographic map.
 
 # Confirmatory Factor Analysis
-Lets first perform exploratory factor analysis on the following industries:
-* "IT"
-* "Health"
-* "Construction"
-* "Manufacturing"
-* "Entertainment"
-* "Finance"
-
-```{r}
-ind <- c("IT", "Health", "Construction", "Manufacturing", "Entertainment", "Finance")
-efa <- factanal(myindustries[,ind], 2)
-print(efa$loadings, cut =0.5)
-```
-Based on the results of the EFA performed above, lets assume their is a latent variable representing white collar jobs, and a latent variable representing blue collar. 
-
-Let us model the blue collar jobs as:
-* Construction
-* Manufacturing
-
-Let us model the white collar jobs as:
-* IT
-* Health
-* Entertainment
-* Finance
-
-
-```{r}
-industry_model <- specifyModel(file = "model2.txt")
-
-industry_sem <- sem(industry_model, cov(myindustries[,ind]), nrow(myindustries[,ind])) 
-
-summary(industry_sem) 
-#summary(industry_sem)
-```
-```{r}
-semPaths(industry_sem, 'std','est')
-```
-```{r}
-options(fit.indices = c("GFI", "AGFI", "SRMR")) # Some fit indices 
-criteria = summary(industry_sem) 
-print('SRMR')
-print(criteria$SRMR)
-print(criteria$SRMR < 0.05)
-print('GFI')
-print(criteria$GFI)
-print(criteria$GFI > 0.95)
-print('AGFI')
-print(criteria$AGFI)
-print(criteria$AGFI > 0.95)
-```
-```{r}
-parameters = summary(industry_sem)
-est = parameters$coef[8,]
-conf.L = est$Estimate - 1.96 * est$`Std Error`
-conf.U = est$Estimate + 1.96 * est$`Std Error`
-'Estiate'
-est$Estimate
-'Upper'
-conf.U
-'Lower'
-conf.L
-```
 Define appropriate latent variables and apply CFA correctly and discuss the motivation.
 Provide insights into the results
 
