@@ -293,13 +293,14 @@ Define appropriate latent variables and apply CFA correctly and discuss the moti
 Provide insights into the results
 
 # Conclusion
- Present meaningful findings and discuss the pros and cons of the study.
-Suggest some future works for post analysis.
+The purpose of the project was to propose the likely impact of the incoming oil industry by evaluating existing industry to population correlations by region as provided by the national census.  From the results, we have identified two major observations:
 
+	Agriculture & Mining - Little Correlation
+	All Other Industry - High Correlation
 
+Ultimately, there are two groups of industry: production industries (Agriculture, Mining, Oil) and support service industries (Power, Hotels, Finance, etc.).  The data proves that as production industries change, those industries impact support service industries, but do not have much impact on other existing production industries.  We conclude that the introduction of the oil industry will have the effect of any change in a production industry and will impact almost exclusively support service industries.
 
-
-
+These support service industries include Manufacturing, Power, Sewer, Construction, Vehicles, Transportation, Hotels, IT, Finance, Real Estate	Professional, Administrative, Pubic Sector, Education, Health, Entertainment, Membership Orgs, Other Goods and Overseas.  We suggest that investment in Guyana as a result of the incloming oil industry be directed to one of these industries.
 
 
 
