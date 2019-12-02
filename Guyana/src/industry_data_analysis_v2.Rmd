@@ -4,42 +4,34 @@ output:
 ##  html_document: default
 ---
 
-
-```{r setup, include=FALSE, echo=FALSE}
-knitr::include_graphics("https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/src/cover_page.jpg") # insert cover page
-
-# redundant due to cover page?
-#---
-#title: "Guyana Data Analysis"
-#author: "John C. Hale, Leonard Clinton"
-#date: "November 23, 2019"
-#output: pdf_document
-#---
-#---
-#title: "Group 3 Project"
-#authors: "John C. Hale, Leonard Clinton"
-#date: "November 20, 2019"
-#output: html_document
-#---
-# Introduction
-#Clearly describe the dataset and clearly describe the motivation behind studying the data. 
-#Provide scholarly citations or quantitative facts to describe the motivation
-# Data Cleaning & Visualization
-#Clearly describe the data cleaning and outlier removal process.
-#Present insightful visualizations motivating to do further exploratory or confirmatory analysis.
+```{r echo=FALSE}
+knitr::include_graphics('https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/cover_page.jpg') # retrieve from GitHub
+# stretch to fit before submitting
 ```
-&nbsp;
 
 &nbsp;
 
 &nbsp;
+
+&nbsp;
+
+# Citations
+
+_The $20 Billion Question for Guyana_, Clifford Krauss, July 20, 2018
+https://www.nytimes.com/2018/07/20/business/energy-environment/the-20-billion-question-for-guyana.html
+
+_2012 Census Data_, Guyana Bureau of Statistics
+
+https://statisticsguyana.gov.gy/ 
 
 # Data Cleaning & Visualization
 
 Much of the clenaing was done in Python. It consisted of dropping race, religion, sex, village names, & village number data We decided to focus only on the industry categories. 
 
 ### Install the R Required Packages
-```{r}
+
+```{r echo=FALSE}
+options( warn = -1, width = 160)
 #install.packages("MVA")
 #install.packages("psych")
 library(psych)
@@ -52,27 +44,34 @@ library(semPlot)
 
 ### Read in Data
 ```{r}
-options( warn = -1, width = 160 )
-census <- read.csv("https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/data/cleaned_census_data2.csv")
-#census_perc <- read.csv("../data/cleaned_census_perc_data2.csv")
+census <- read.csv("https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/data/cleaned_census_data2.csv") # retrieve from GitHub
 focus <- c('ID','Region','Agriculture', 'Construction', 'IT', 'Finance', 'Education', 'Manufacturing','Mining', 'Entertainment', 'Health','Administrative','Population')
 census$ID <- seq.int(nrow(census))
 mydata <- census[,focus]
 myindustries <- mydata[,3:12]
-head(mydata)
 options(digits = 3)
+# head(mydata) screenshot
+```
 
+```{r echo=FALSE}
+knitr::include_graphics('https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/head_data.png') # retrieve from GitHub
 ```
 
 ### Correlation Matrix
 ```{r}
 cor <- cor(mydata)
-cor
+# cor screenshot
 ```
+
+```{r echo=FALSE}
+knitr::include_graphics('https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/cor_data.png') # retrieve from GitHub
+```
+
 ```{r}
 plot(myindustries, col=mydata$Region, main = "Array of Scatter Plots")
 ```
-Notice that, with the exception of agriculture, all of the industries appear to be positively correlated with population. 
+
+Notice that, with the exception of agriculture, all of the industries appear to be positively correlated with population. Mining has a weaker correlation than the other industries.
 
 
 ```{r}
@@ -301,6 +300,3 @@ The purpose of the project was to propose the likely impact of the incoming oil 
 Ultimately, there are two groups of industry: production industries (Agriculture, Mining, Oil) and support service industries (Power, Hotels, Finance, etc.).  The data proves that as production industries change, those industries impact support service industries, but do not have much impact on other existing production industries.  We conclude that the introduction of the oil industry will have the effect of any change in a production industry and will impact almost exclusively support service industries.
 
 These support service industries include Manufacturing, Power, Sewer, Construction, Vehicles, Transportation, Hotels, IT, Finance, Real Estate	Professional, Administrative, Pubic Sector, Education, Health, Entertainment, Membership Orgs, Other Goods and Overseas.  We suggest that investment in Guyana as a result of the incloming oil industry be directed to one of these industries.
-
-
-
