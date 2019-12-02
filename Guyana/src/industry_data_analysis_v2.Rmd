@@ -254,7 +254,7 @@ Let us model the white collar jobs as:
 
 
 ```{r}
-industry_model <- specifyModel(file = "model2.txt")
+industry_model <- specifyModel(file = "https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/src/model2.txt")
 
 industry_sem <- sem(industry_model, cov(myindustries[,ind]), nrow(myindustries[,ind])) 
 
