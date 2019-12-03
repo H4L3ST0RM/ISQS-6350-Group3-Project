@@ -271,14 +271,18 @@ print(criteria$SRMR)
 print(criteria$SRMR < 0.05)
 print('GFI')
 print(criteria$GFI)
-print(criteria$GFI > 0.95)
+print(criteria$GFI > 0.9)
 print('AGFI')
 print(criteria$AGFI)
-print(criteria$AGFI > 0.95)
+print(criteria$AGFI > 0.9)
 ```
+The standard root means square difference (SRMR) is less than 0.05, and our Goodness-of-fit index (GFI) is greater than 0.9. Both of these measures indicate that we have a decent model. Our adjusted goodness of fit index on the other hand is at 0.79, well below 0.9, indicating this isn't such a great model. 
+
+Given that 2 of the 3 measures indicate this is a good model, I think we can assume the model is adequate for our purposes.
+
 ```{r}
 parameters = summary(industry_sem)
-est = parameters$coef[8,]
+est = parameters$coef[7,]
 conf.L = est$Estimate - 1.96 * est$`Std Error`
 conf.U = est$Estimate + 1.96 * est$`Std Error`
 'Estiate'
@@ -288,8 +292,9 @@ conf.U
 'Lower'
 conf.L
 ```
-Define appropriate latent variables and apply CFA correctly and discuss the motivation.
-Provide insights into the results
+Above is the estimated correlation between our two factors. There appears to be a noticeable correlation between our "blue" and "white" factors.
+
+
 
 # Conclusion
 The purpose of the project was to propose the likely impact of the incoming oil industry by evaluating existing industry to population correlations by region as provided by the national census.  From the results, we have identified two major observations:
