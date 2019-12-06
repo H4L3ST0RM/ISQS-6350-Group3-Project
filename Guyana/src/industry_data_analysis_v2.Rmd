@@ -18,11 +18,22 @@ knitr::include_graphics('https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-G
 # Citations
 
 _The $20 Billion Question for Guyana_, Clifford Krauss, July 20, 2018
+
 https://www.nytimes.com/2018/07/20/business/energy-environment/the-20-billion-question-for-guyana.html
+
 
 _2012 Census Data_, Guyana Bureau of Statistics
 
 https://statisticsguyana.gov.gy/ 
+
+
+GitHub ISQS-6350-Group3-Project
+
+https://github.com/H4L3ST0RM/ISQS-6350-Group3-Project/
+
+
+Cover template from Inter-American Development Bank - IADB.org
+
 
 # Data Cleaning & Visualization
 
@@ -251,6 +262,24 @@ Let us model the white collar jobs as:
 * Entertainment
 * Finance
 
+Below is the model we are using for our CFA Analysis.
+
+
+White              -> IT, lambda1, NA
+White              -> Entertainment, lambda2, NA
+White              -> Health, lambda3, NA
+Blue               -> Construction, lambda4, NA
+Blue               -> Manufacturing, lambda5, NA
+White              -> Finance, lambda6, NA
+White             <-> Blue, rho, NA
+IT                <-> IT, theta1, NA
+Entertainment     <-> Entertainment, theta2, NA
+Health            <-> Health, theta3, NA
+Construction      <-> Construction, theta4, NA
+Manufacturing     <-> Manufacturing, theta5, NA
+Finance	          <-> Finance, theta6, NA
+White <-> White, NA, 1
+Blue <-> Blue, NA, 1
 
 ```{r}
 industry_model <- specifyModel(file = "https://raw.githubusercontent.com/H4L3ST0RM/ISQS-6350-Group3-Project/master/Guyana/src/model2.txt")
